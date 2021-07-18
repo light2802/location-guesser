@@ -18,4 +18,3 @@ Geolocating google street view image sequences using CNN/LSTM.
 * The class called `Geoguessr` is used for training, testing, saving and loading the model. This class can be found in the file `machineLearning/geoLSTM.py`. The file can be run from terminal using the run instructions provided at the begining of the .py file. The training and testing runs will only be run on a sample of data as there the complete dataset is not in this repo
 * The `Geoguessr` class can also be used by running cells in the notebook `ML/location_guesser_train_test.ipynb` to train and test a model.
 * The final trained models are not in this repo.
-{"mode":"full","isActive":false}
