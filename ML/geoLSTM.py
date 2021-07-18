@@ -20,11 +20,11 @@ from tensorflow.keras.layers import Conv2D, BatchNormalization, MaxPool2D, Globa
 from tensorflow.keras.applications.resnet50 import ResNet50
 
 # directory containing data, train test file split
-DATADIR = "../infoExtraction/data"
+DATADIR = "../data extract/data"
 # directory containing combined location data folders
-DATACOMBINED = DATADIR + "/dataCombinedSamples/"
+DATACOMBINED = DATADIR + "/data combined/"
 # directory containing polygon gird shapes
-POLYDIR = "../infoExtraction" 
+POLYDIR = "../data extract" 
 # directory to store/load model in/from
 MODELDIR = "models"
 
@@ -64,7 +64,7 @@ class Geoguessr:
     The class has all the functions required to built, train and test the geoguessr LSTM model.
     '''
     def __init__(self, model=None, loss=-1, useRestnet = True, 
-                 inputShape=(3, 300, 600, 3), gridCount=243,
+                 inputShape=(3, 300, 600, 3), gridCount=327,
                  modelOptimizer=tf.keras.optimizers.Adam()):
         '''
         The function is used to load or initialize a new model
@@ -289,8 +289,8 @@ class Geoguessr:
         # <gridNo>+<lat,long>
         # 60+48.4271513,-110.5611851
         dataDir: Directory that stores combined image files eg: "/dataCombinedSamples/"
-        polyGrid: List of polygons that contain make up the USA split into grids.
-                  It can be loaded from eg: "infoExtraction/usaPolyGrid.pkl"
+        polyGrid: List of polygons that contain make up the IND split into grids.
+                  It can be loaded from eg: "../data extract/indPolyGrid.pkl"
         '''
         # read image triplets from single file
         xx,yy = self.readData([imgFile], dataDir)
@@ -328,7 +328,7 @@ class Geoguessr:
                                     fill_color='red',
                                     fill_opacity=float(yn[grid])
                                     ))
-        fig = gmaps.figure(center=(39.50,-98.35), zoom_level=4)
+        fig = gmaps.figure(center=(78.9629,20.5937), zoom_level=4)
         fig.add_layer(gmaps.drawing_layer(features=gPoly))
         fig.add_layer(gmaps.drawing_layer(features=[gLine]))
         fig.add_layer(gmaps.symbol_layer([start], scale=3, 
@@ -350,15 +350,15 @@ if __name__ == '__main__':
     if args.testModelName!=None:
         print("In testing mode.")
         geoModel = Geoguessr.load(MODELDIR + '/' + args.testModelName)
-        TESF = np.load(DATADIR + '/testFiles.npy')
-        usaPolyGrid = pickle.load(open(POLYDIR + "/usaPolyGrid.pkl",'rb'))
+        TESF = np.load(DATADIR + '/test.npy')
+        indPolyGrid = pickle.load(open(POLYDIR + "/indPolyGrid.pkl",'rb'))
         geoModel.predictSingle(TESF[0], DATACOMBINED , ployGrid=usaPolyGrid)
 
     # if pretrained model is not provide train a new one and save
     else:
         print("In training mode. Training new model")
-        TF = np.load(DATADIR + '/trainFiles.npy')
-        geoModel = Geoguessr(useRestnet = True)
+        TF = np.load(DATADIR + '/train.npy')
+        geoModel = Geoguessr(useRestnet = True,gridCount=len(indPolyGrid))
         geoModel.fit(trainFiles = TF, 
                       dataDir = DATACOMBINED, 
                       saveFolder = MODELDIR,
