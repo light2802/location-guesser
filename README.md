@@ -11,7 +11,7 @@ Geolocating google street view image sequences using CNN/LSTM.
 * Forty locations were scraped from each grid across 327 grids bringing the total dataset size to 1013 locations. 
 * The python scripts for data scraping can be found in the notebook `data extract/data_scraping.ipynb`
 * Only a sample of 10 location folders can be found at `data extract/data/data combined`. 
-* The 10 sample location folder names are split into train and test set of 10 and 2 respectively. This sample train test split can be found at `ata extract/data/train.npy` and `data extract/data/test.npy` respectively.
+* The 10 sample location folder names are split into train and test set of 9 and 1 respectively. This sample train test split can be found at `ata extract/data/train.npy` and `data extract/data/test.npy` respectively.
 * Note: The data found in this repo is just a sample dataset to mock training and testing features of the model.
 
 ## CNN/LSTM model
