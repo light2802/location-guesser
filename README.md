@@ -3,7 +3,7 @@ Geolocating google street view image sequences using CNN/LSTM.
 
 ## Map creation
 * The geolocation task for this project was restricted to the map of mainland India
-* The map of mainlad USA was extracted as a polygon from the IND0 shapefile. The map of India mainland polygon is stored in the file `data extract/indPoly.pkl`. The python script for extracting the map from the shapefile can be found in the notebook `data extract/grid_create.ipynb`.
+* The map of mainlad India was extracted as a polygon from the IND0 shapefile. The map of India mainland polygon is stored in the file `data extract/indPoly.pkl`. The python script for extracting the map from the shapefile can be found in the notebook `data extract/grid_create.ipynb`.
 * The map was then split into grids of roughly even size and the list of polygon grids was stored in the file `data extract/indPolyGrid.pkl`. The code for creating the grids can be found in the notebook `data extract/grid_create.ipynb`
 
 ## Dataset
